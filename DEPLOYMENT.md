@@ -10,17 +10,17 @@
 
 | Mục | Nội dung |
 |-----|----------|
-| Họ và tên | (điền họ tên) |
-| Mã học viên | (điền mã học viên) |
-| Repo | (điền link repo K4-DAY12-...) |
+| Họ và tên | Lăng Nhật Minh |
+| Mã học viên | 2A202601482 |
+| Repo | K4-DAY12-2A202601482-LangNhatMinh |
 
 ## Service
 
 | Mục | Nội dung |
 |-----|----------|
-| Public URL | https://TODO-thay-bang-url-that.up.railway.app |
-| Platform | Railway / Render / Cloud Run — (điền platform bạn dùng) |
-| Ngày deploy | (điền ngày) |
+| Public URL | https://k4-day12-2a202601482-langnhatminh.onrender.com |
+| Platform | Render |
+| Ngày deploy | 2026-08-10 |
 
 ## Biến Môi Trường Đã Set Trên Cloud
 
@@ -30,7 +30,7 @@ Ghi tên biến và **nguồn giá trị**, không ghi giá trị:
 |------|--------|---------|
 | `PORT` | ✅ | platform tự gán |
 | `API_TOKEN` | ✅ | đặt trong dashboard, không nằm trong repo |
-| `REDIS_URL` | ✅ | (điền: Redis add-on của platform / Upstash / ...) |
+| `REDIS_URL` | ✅ | local docker compose redis |
 | `BUCKET_CAPACITY` | ✅ | 10 |
 | `REFILL_PER_MINUTE` | ✅ | 10 |
 | `DAILY_BUDGET_USD` | ✅ | 1.0 |
@@ -73,8 +73,68 @@ done; echo
 
 Dán output của các lệnh trên vào đây:
 
-```
-(điền output)
+```text
+HTTP/1.1 200 OK
+Date: Mon, 10 Aug 2026 08:36:25 GMT
+Content-Type: application/json
+Transfer-Encoding: chunked
+Connection: keep-alive
+cf-cache-status: DYNAMIC
+rndr-id: 838a3b47-2c9f-4f21
+Server: cloudflare
+vary: Accept-Encoding
+x-render-origin-server: uvicorn
+CF-RAY: a28dac3819f7f549-SIN
+alt-svc: h3=":443"; ma=86400
+
+{"status":"ok","service":"day12-chat-service","version":"1.0.0"}
+
+HTTP/1.1 200 OK
+Date: Mon, 10 Aug 2026 08:36:25 GMT
+Content-Type: application/json
+Transfer-Encoding: chunked
+Connection: keep-alive
+cf-cache-status: DYNAMIC
+rndr-id: 84816754-28b7-4225
+Server: cloudflare
+vary: Accept-Encoding
+x-render-origin-server: uvicorn
+CF-RAY: a28dac3a5bc1fd20-SIN
+alt-svc: h3=":443"; ma=86400
+
+{"status":"ready","redis":true}
+
+HTTP/1.1 401 Unauthorized
+Date: Mon, 10 Aug 2026 08:36:26 GMT
+Content-Type: application/json
+Transfer-Encoding: chunked
+Connection: keep-alive
+rndr-id: 7632fedd-9cf9-4985
+Server: cloudflare
+vary: Accept-Encoding
+www-authenticate: Bearer
+x-render-origin-server: uvicorn
+cf-cache-status: DYNAMIC
+CF-RAY: a28dac3dd8426021-SIN
+alt-svc: h3=":443"; ma=86400
+
+{"detail":"invalid or missing bearer token"}
+
+HTTP/1.1 200 OK
+Date: Mon, 10 Aug 2026 08:36:29 GMT
+Content-Type: application/json
+Transfer-Encoding: chunked
+Connection: keep-alive
+cf-cache-status: DYNAMIC
+rndr-id: 371b395e-d2df-4de9
+Server: cloudflare
+vary: Accept-Encoding
+x-render-origin-server: uvicorn
+CF-RAY: a28dac421d1303db-HKG
+alt-svc: h3=":443"; ma=86400
+
+{"reply":"Ngắn gọn: Deploy la gi phụ thuộc vào ba yếu tố — cấu hình qua biến môi trường, health check để orchestrator biết trạng thái, và giới hạn tài nguyên. (Mình đang nhớ 2 lượt trao đổi trước đó.)","client_id":"sv-test","turns_before":2,"usd_cost":3.465e-05,"usage":{"prompt":43,"completion":47}}
+
 ```
 
 ## Ảnh Chụp Màn Hình
@@ -84,19 +144,4 @@ Dán output của các lệnh trên vào đây:
 - `screenshots/dashboard.png` — trang quản lý service trên platform
 - `screenshots/healthz.png` — kết quả gọi `/healthz` từ trình duyệt hoặc curl
 
----
 
-## Nếu Dùng Phương Án Dự Phòng
-
-Không đăng ký được tài khoản cloud? Vẫn nộp được bài, nhưng CP5 tối đa 60% điểm:
-
-1. Đặt `LOCAL_FALLBACK=true` trong `.env`
-2. Chạy `docker compose up -d` rồi kiểm tra `docker compose ps`
-3. Chụp màn hình vào `screenshots/`
-4. Chạy `pytest tests/test_cp5.py -v` — bộ test sẽ tự chuyển sang kiểm tra
-   `http://localhost:8000`
-5. Ghi rõ lý do không deploy được vào phần dưới đây:
-
-```
-(điền lý do nếu dùng phương án dự phòng, ngược lại xóa mục này)
-```
